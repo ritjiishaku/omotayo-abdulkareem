@@ -12,7 +12,7 @@ export default function WhatsAppButton({ phone }: WhatsAppButtonProps) {
       href={`https://wa.me/${waNum}?text=Hi%20Omotayo%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20automation%20services.`}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#128C7E] shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+      className="fixed bottom-6 right-6 z-40 flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#128C7E] shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
       aria-label="Chat on WhatsApp"
     >
       <svg

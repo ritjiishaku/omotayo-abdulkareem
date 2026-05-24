@@ -32,7 +32,7 @@ export default function Projects({ projects }: ProjectsProps) {
   }, [projects, selectedCategory]);
 
   return (
-    <section id="projects" className="py-24 bg-bg-primary">
+    <section id="projects" className="py-16 md:py-20 lg:py-24 bg-bg-primary">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
           <p className="section-label">05 / Proven Outcomes</p>

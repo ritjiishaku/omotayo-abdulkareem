@@ -7,7 +7,7 @@ interface TestimonialsProps {
 
 export default function Testimonials({ testimonials }: TestimonialsProps) {
   return (
-    <section id="testimonials" className="py-24 bg-bg-surface">
+    <section id="testimonials" className="py-16 md:py-20 lg:py-24 bg-bg-surface">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
           <p className="section-label">06 / Client Endorsements</p>
@@ -15,7 +15,7 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
           <div className="section-divider mx-auto" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {testimonials.map((testimonial, idx) => (
             <div
               key={idx}

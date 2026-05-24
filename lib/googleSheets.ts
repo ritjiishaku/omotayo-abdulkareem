@@ -12,15 +12,17 @@ import {
 import { Project } from "@/types/project";
 import { Experience } from "@/types/experience";
 import { Skill } from "@/types/skill";
+import { getAccessToken } from "./sheetsAuth";
 
 const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
-const API_KEY = process.env.GOOGLE_DEVELOPER_API_KEY;
 
 async function getSheetValues(range: string): Promise<string[][] | null> {
-  if (!SPREADSHEET_ID || !API_KEY) return null;
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range}?key=${API_KEY}`;
+  if (!SPREADSHEET_ID) return null;
   try {
+    const token = await getAccessToken();
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range}`;
     const res = await fetch(url, {
+      headers: { Authorization: `Bearer ${token}` },
       next: { revalidate: 3600 },
     });
     if (!res.ok) {
@@ -32,6 +34,35 @@ async function getSheetValues(range: string): Promise<string[][] | null> {
   } catch (error) {
     console.error(`[Google Sheets] Error fetching "${range}":`, error);
     return null;
+  }
+}
+
+export async function updateSheetValues(
+  range: string,
+  values: string[][]
+): Promise<boolean> {
+  if (!SPREADSHEET_ID) return false;
+  try {
+    const token = await getAccessToken();
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range}?valueInputOption=USER_ENTERED`;
+    const res = await fetch(url, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ values }),
+    });
+    if (!res.ok) {
+      console.warn(
+        `[Google Sheets] Failed to update "${range}": ${res.statusText}`
+      );
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error(`[Google Sheets] Error updating "${range}":`, error);
+    return false;
   }
 }
 

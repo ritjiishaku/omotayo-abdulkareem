@@ -16,10 +16,10 @@ export default function Hero({ generalInfo }: HeroProps) {
     >
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-px bg-gold/30" />
 
-      <div className="max-w-4xl mx-auto px-6 py-24 text-center space-y-10">
+      <div className="max-w-4xl mx-auto px-6 py-12 lg:py-24 text-center space-y-8 md:space-y-10">
         <div className="space-y-5">
           <h1 className="space-y-2">
-            <span className="block font-serif text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-[1.1]">
+            <span className="block font-serif text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-[1.1] break-words">
               {generalInfo.name}
             </span>
             <span className="block font-serif text-2xl md:text-3xl lg:text-4xl font-semibold tracking-wide text-gold">

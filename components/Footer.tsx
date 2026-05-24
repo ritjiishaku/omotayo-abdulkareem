@@ -44,7 +44,7 @@ export default function Footer({ generalInfo }: FooterProps) {
     <footer className="bg-bg-primary border-t border-gold/10 pt-16 pb-8">
 
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 mb-12">
           {/* Logo and Tagline */}
           <div className="md:col-span-2 space-y-6">
             <Link href="/" className="flex items-center space-x-2">

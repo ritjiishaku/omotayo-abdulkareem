@@ -30,7 +30,7 @@ export default function About({ generalInfo }: AboutProps) {
   ];
 
   return (
-    <section id="about" className="py-24 bg-bg-primary relative">
+    <section id="about" className="py-16 md:py-20 lg:py-24 bg-bg-primary relative">
 
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Heading */}
@@ -45,7 +45,7 @@ export default function About({ generalInfo }: AboutProps) {
         </div>
 
         {/* Content Split */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
           {/* Detailed Biography */}
           <div className="lg:col-span-7 space-y-6 text-text-primary leading-relaxed">
             <h3 className="font-serif text-2xl font-semibold text-white">

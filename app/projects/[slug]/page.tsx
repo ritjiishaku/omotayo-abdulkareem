@@ -76,7 +76,7 @@ export default async function ProjectPage({ params }: PageProps) {
         <Navbar generalInfo={generalInfo} />
 
         <main className="flex-1 pt-32 pb-24">
-          <div className="max-w-5xl mx-auto px-6 space-y-12">
+          <div className="max-w-5xl mx-auto px-6 space-y-8 lg:space-y-12">
             <Link
               href="/#projects"
               className="inline-flex items-center space-x-2 text-xs uppercase tracking-widest text-text-muted hover:text-gold font-semibold transition-colors duration-200 group"
@@ -94,7 +94,7 @@ export default async function ProjectPage({ params }: PageProps) {
                   {project.category}
                 </span>
               )}
-              <h1 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight">
+              <h1 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight break-words">
                 {project.title}
               </h1>
               <p className="text-text-muted text-base md:text-lg max-w-3xl leading-relaxed">
@@ -113,7 +113,7 @@ export default async function ProjectPage({ params }: PageProps) {
               />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pt-4">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pt-4">
               <div className="lg:col-span-4 space-y-6 lg:order-last">
                 <div className="card-hover p-6 space-y-6">
                   <h3 className="font-serif text-lg font-bold text-white tracking-wider border-b border-gold/10 pb-3">
@@ -129,7 +129,7 @@ export default async function ProjectPage({ params }: PageProps) {
                 </div>
               </div>
 
-              <div className="lg:col-span-8 space-y-12 leading-relaxed text-text-primary">
+              <div className="lg:col-span-8 space-y-8 lg:space-y-12 leading-relaxed text-text-primary">
                 <div className="space-y-4">
                   <h2 className="font-serif text-2xl font-bold text-white tracking-wide">
                     Overview

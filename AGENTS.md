@@ -43,6 +43,11 @@ app/
   robots.ts           — Allow all, sitemap pointer
   projects/[slug]/
     page.tsx          — Project detail: generateStaticParams, dynamicParams=false, generateMetadata, next/image, JSON-LD schema
+  api/
+    sheets/
+      route.ts        — GET (read all data), POST/PUT (write to any tab)
+      [tab]/
+        route.ts      — PUT (write to a specific tab by name)
   globals.css         — All styles via @theme tokens + utility classes
 
 components/
@@ -61,7 +66,8 @@ components/
 
 lib/
   mockData.ts         — All fallback data + shared interfaces (GeneralInfo, Service, Testimonial). Content fully automation-reframed.
-  googleSheets.ts     — Fetch layer with ISR (revalidate: 3600), column-based parsing, mock fallback per entity
+  googleSheets.ts     — Fetch layer with ISR (revalidate: 3600), column-based parsing, mock fallback per entity, updateSheetValues()
+  sheetsAuth.ts       — JWT auth using service account (createPrivateKey + RSA-SHA256 signing), token caching
   seo.ts              — JSON-LD schema generators: Person, LocalBusiness, Services, Project
 
 types/
@@ -73,15 +79,17 @@ public/               — Static assets (og.png, favicon, etc.)
 ## Data Flow
 
 1. `app/page.tsx` calls 6 `get*()` functions from `lib/googleSheets.ts` in parallel via `Promise.all`.
-2. Each function fetches its sheet tab via the Google Sheets API with `?key=API_KEY` and `next: { revalidate: 3600 }` for ISR caching.
+2. Each function calls `getAccessToken()` from `lib/sheetsAuth.ts` (JWT via service account), then fetches its sheet tab with `Authorization: Bearer <token>` and `next: { revalidate: 3600 }` for ISR caching.
 3. If the API call fails or returns invalid data, the function falls back to the corresponding mock data from `lib/mockData.ts`.
 4. Structured data (JSON-LD) is generated server-side via `lib/seo.ts` and injected into the `<head>` via `<script type="application/ld+json">` in the page component.
 
 ## Google Sheets CMS
 
-- **API Key**: `AIzaSyA4QhB__W6-C805RffwW4QDFpf6m9r5rA0`
+- **Auth**: Service account (JWT bearer grant) via `lib/sheetsAuth.ts`
+- **Service Account Email**: `portfolio@omotayo-abdulkareem-portfolio.iam.gserviceaccount.com`
+- **Must be added as Editor** on the sheet (Share → add email as Editor)
 - **Spreadsheet ID**: `1g9M7hMFo3zewh50soI8WrrGSIlrPrxSGlNQhoIfaCDE`
-- **Sheet must be shared** as "Anyone with the link → Viewer"
+- **Env var** `GOOGLE_SERVICE_ACCOUNT_KEY_B64`: base64-encoded service account JSON key
 - **Sheets API must be enabled** in Google Cloud Console
 - Expected 6 tabs with exact column headers (case-insensitive, parsed via `parseRowsToObjects`):
   Row 1 = column headers, Row 2+ = data.
@@ -147,6 +155,56 @@ Categories are grouped in the UI via `Array.from(new Set(...))`.
 
 - To reflect edits immediately, append `?clearCache` to the URL or wait for the 1-hour ISR revalidation.
 - When adding a new field to an interface, add the parser in `googleSheets.ts` and add the column header to the sheet.
+
+## Write API (Update Sheets Programmatically)
+
+Two endpoints for writing data back to Google Sheets:
+
+### `PUT /api/sheets/[tab]`
+
+Update a specific tab. `[tab]` is one of: `general`, `services`, `skills`, `experience`, `projects`, `testimonials`.
+
+```json
+// Body: { "values": [["col1", "col2"], ["val1", "val2"]] }
+// First row = headers (overwrites existing), subsequent rows = data
+PUT /api/sheets/projects
+{ "values": [["Id","Slug","Title",...], ["1","autoreach-...","AutoReach",...]] }
+```
+
+### `GET /api/sheets`
+
+Returns all data from all 6 sheets in one response (debug/inspection).
+
+### `POST` / `PUT /api/sheets`
+
+Alternative endpoint with `tab` in body:
+
+```json
+POST /api/sheets
+{ "tab": "projects", "values": [...] }
+```
+
+### Tab → Range Mapping
+
+| Tab | Sheet Range |
+|-----|-------------|
+| `general` | General!A1:B20 |
+| `services` | Services!A1:B50 |
+| `skills` | Skills!A1:C50 |
+| `experience` | Experience!A1:D50 |
+| `projects` | Projects!A1:K50 |
+| `testimonials` | Testimonials!A1:C50 |
+
+### Example: Python script to update services
+
+```python
+import requests
+res = requests.put(
+    "https://omotayo.dev/api/sheets/services",
+    json={"values": [["Title", "Description"], ["AI Workflow", "Connect your..."]]}
+)
+print(res.json())  # {"ok": true, "tab": "services", "rows": 2}
+```
 
 ## Section Numbering
 

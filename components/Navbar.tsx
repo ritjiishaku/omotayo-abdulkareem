@@ -98,7 +98,7 @@ export default function Navbar({ generalInfo }: NavbarProps) {
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex flex-col h-full justify-between p-8">
+        <div className="flex flex-col h-full justify-between p-8 overflow-y-auto">
           <div className="space-y-6 mt-16">
             {navLinks.map(link => (
               <a

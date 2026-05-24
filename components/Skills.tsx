@@ -9,7 +9,7 @@ export default function Skills({ skills }: SkillsProps) {
   const categories = Array.from(new Set(skills.map((s) => s.category)));
 
   return (
-    <section id="skills" className="py-24 bg-bg-primary">
+    <section id="skills" className="py-16 md:py-20 lg:py-24 bg-bg-primary">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
           <p className="section-label">03 / Automation Stack</p>

@@ -7,7 +7,7 @@ interface ExperienceProps {
 
 export default function ExperienceSection({ experiences }: ExperienceProps) {
   return (
-    <section id="experience" className="py-24 bg-bg-surface">
+    <section id="experience" className="py-16 md:py-20 lg:py-24 bg-bg-surface">
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-20 space-y-3">
           <p className="section-label">04 / Professional Path</p>
@@ -15,12 +15,12 @@ export default function ExperienceSection({ experiences }: ExperienceProps) {
           <div className="section-divider mx-auto" />
         </div>
 
-        <div className="relative ml-4 md:ml-8">
+        <div className="relative ml-3 md:ml-8">
           <div className="absolute left-0 md:left-4 top-2 bottom-2 w-px bg-gold/15" />
 
-          <div className="space-y-12">
+          <div className="space-y-10 md:space-y-12">
             {experiences.map((exp, idx) => (
-              <div key={idx} className="relative pl-10 md:pl-16 group">
+              <div key={idx} className="relative pl-8 md:pl-16 group">
                 <div className="absolute left-[-4px] md:left-0 top-2 w-2.5 h-2.5 rounded-full bg-gold/40 border-2 border-bg-surface group-hover:bg-gold group-hover:scale-125 transition-all duration-300" />
 
                 <div className="card-hover p-6 md:p-8 space-y-4">
