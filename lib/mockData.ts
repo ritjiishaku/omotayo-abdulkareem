@@ -34,8 +34,8 @@ export const generalInfo: GeneralInfo = {
   bioSummary: "AI Automation Engineer specializing in workflow automation systems, AI agent development, CRM automation, and business process automation. I design production-ready automation systems that eliminate manual bottlenecks, reduce human error, and save thousands of operational hours.",
   bioDetailed: "With deep expertise in workflow automation and systems integration, I specialize in connecting disparate SaaS platforms, building custom AI agents (RAG, LLM chains), and orchestrating seamless data pipelines. I believe automation isn't about replacing humans—it's about freeing them up to focus on high-leverage strategic growth.",
   email: "omolinks@gmail.com",
-  phone: "+2347036195998",
-  whatsapp: "+2347036195998",
+  phone: "+2347036175998",
+  whatsapp: "+2347036175998",
   location: "Lagos, Nigeria (Remote)",
   linkedin: "https://www.linkedin.com/in/omotayo-abdulkareem",
   stats: [
