@@ -26,9 +26,18 @@ export default function Contact({ generalInfo }: ContactProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("submitting");
-    await new Promise((r) => setTimeout(r, 1000));
-    setStatus("success");
-    setFormData({ name: "", email: "", message: "" });
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+    } catch {
+      setStatus("error");
+    }
   };
 
   const waNum = generalInfo.whatsapp.replace(/\D/g, "");

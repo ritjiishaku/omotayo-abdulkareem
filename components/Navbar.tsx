@@ -94,7 +94,7 @@ export default function Navbar({ generalInfo }: NavbarProps) {
 
       {/* Mobile Drawer */}
       <div
-        className={`fixed inset-y-0 right-0 w-64 bg-bg-surface border-l border-gold/20 z-40 transform transition-transform duration-300 ease-in-out md:hidden ${
+        className={`fixed inset-y-0 right-0 w-64 bg-bg-surface border-l border-gold/20 z-[60] transform transition-transform duration-300 ease-in-out md:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -138,7 +138,7 @@ export default function Navbar({ generalInfo }: NavbarProps) {
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 md:hidden"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[55] md:hidden"
         />
       )}
     </nav>

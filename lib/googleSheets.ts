@@ -13,8 +13,14 @@ import { Project } from "@/types/project";
 import { Experience } from "@/types/experience";
 import { Skill } from "@/types/skill";
 import { getAccessToken } from "./sheetsAuth";
+import { cache } from "react";
 
 const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
+
+/** Normalize line endings from Sheets (may export \r\n or \r) to \n */
+function normalizeLineEndings(str: string): string {
+  return str.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+}
 
 async function getSheetValues(range: string): Promise<string[][] | null> {
   if (!SPREADSHEET_ID) return null;
