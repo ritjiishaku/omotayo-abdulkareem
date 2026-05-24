@@ -68,9 +68,7 @@ export async function getGeneralInfo(): Promise<GeneralInfo> {
       else if (key === "phone") info.phone = val;
       else if (key === "whatsapp") info.whatsapp = val;
       else if (key === "location") info.location = val;
-      else if (key === "github") info.github = val;
       else if (key === "linkedin") info.linkedin = val;
-      else if (key === "twitter") info.twitter = val;
     });
     return info;
   } catch (e) {

@@ -11,7 +11,7 @@ export function getPersonSchema(info: GeneralInfo) {
     "jobTitle": info.role,
     "description": "AI Automation Engineer specializing in workflow automation, AI agent systems, CRM automation, and business process automation. Helping businesses eliminate manual bottlenecks and scale operations through intelligent automation systems.",
     "url": siteUrl,
-    "sameAs": [info.github, info.linkedin, info.twitter].filter(Boolean),
+    "sameAs": [info.linkedin].filter(Boolean),
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Lagos",
@@ -61,7 +61,7 @@ export function getLocalBusinessSchema(info: GeneralInfo) {
       "addressLocality": "Lagos",
       "addressCountry": "NG",
     },
-    "sameAs": [info.github, info.linkedin, info.twitter].filter(Boolean),
+    "sameAs": [info.linkedin].filter(Boolean),
     "areaServed": "Worldwide",
     "priceRange": "$$",
   };

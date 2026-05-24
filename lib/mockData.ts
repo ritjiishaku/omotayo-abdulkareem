@@ -23,9 +23,7 @@ export interface GeneralInfo {
   phone: string;
   whatsapp: string;
   location: string;
-  github: string;
   linkedin: string;
-  twitter: string;
   stats: { label: string; value: string }[];
 }
 
@@ -39,9 +37,7 @@ export const generalInfo: GeneralInfo = {
   phone: "+2347036195998",
   whatsapp: "+2347036195998",
   location: "Lagos, Nigeria (Remote)",
-  github: "https://github.com",
   linkedin: "https://www.linkedin.com/in/omotayo-abdulkareem",
-  twitter: "https://twitter.com",
   stats: [
     { label: "Hours Saved / Month", value: "250+" },
     { label: "Successful Automations", value: "50+" },

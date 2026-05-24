@@ -129,14 +129,6 @@ export default function Navbar({ generalInfo }: NavbarProps) {
               >
                 LinkedIn
               </a>
-              <a
-                href={generalInfo.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-link"
-              >
-                GitHub
-              </a>
             </div>
           </div>
         </div>
