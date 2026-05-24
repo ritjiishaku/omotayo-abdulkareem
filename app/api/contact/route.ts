@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
+import { Resend } from "resend";
 import { getAccessToken } from "@/lib/sheetsAuth";
 
 const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const RANGE = "ContactSubmissions!A:D";
+
+const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null;
 
 export async function POST(req: NextRequest) {
   try {
@@ -21,41 +25,53 @@ export async function POST(req: NextRequest) {
     }
 
     const timestamp = new Date().toISOString();
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim();
+    const trimmedMessage = message.trim();
 
-    // Always log so submissions are never silently lost
-    console.log("[Contact] New submission:", { name, email, timestamp });
-
-    if (!SPREADSHEET_ID) {
-      // No sheet configured — still acknowledge the submission
-      console.warn(
-        "[Contact] GOOGLE_SHEETS_SPREADSHEET_ID not set. Submission logged above."
-      );
-      return NextResponse.json({ ok: true });
+    // Save to Google Sheet
+    if (SPREADSHEET_ID) {
+      try {
+        const token = await getAccessToken();
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${encodeURIComponent(RANGE)}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`;
+        await fetch(url, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            values: [[trimmedName, trimmedEmail, trimmedMessage, timestamp]],
+          }),
+        });
+      } catch (err) {
+        console.error("[Contact] Sheet append failed:", err);
+      }
     }
 
-    const token = await getAccessToken();
-
-    // Append a new row to the ContactSubmissions tab
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${encodeURIComponent(
-      RANGE
-    )}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`;
-
-    const res = await fetch(url, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        values: [[name.trim(), email.trim(), message.trim(), timestamp]],
-      }),
-    });
-
-    if (!res.ok) {
-      const text = await res.text();
-      console.error("[Contact] Failed to append to sheet:", res.status, text);
-      // Return success anyway so the user isn't punished for a sheet misconfiguration
-      return NextResponse.json({ ok: true, warning: "sheet_unavailable" });
+    // Send email notification via Resend
+    if (resend) {
+      try {
+        await resend.emails.send({
+          from: "Portfolio Contact <onboarding@resend.dev>",
+          to: "omolinks@gmail.com",
+          subject: `New Contact from ${trimmedName}`,
+          html: `
+            <h2>New Contact Form Submission</h2>
+            <p><strong>Name:</strong> ${trimmedName}</p>
+            <p><strong>Email:</strong> ${trimmedEmail}</p>
+            <p><strong>Message:</strong></p>
+            <p style="white-space: pre-wrap;">${trimmedMessage}</p>
+            <hr />
+            <p style="color: #888; font-size: 12px;">Submitted at ${timestamp}</p>
+          `,
+        });
+        console.log("[Contact] Email sent to omolinks@gmail.com");
+      } catch (err) {
+        console.error("[Contact] Email send failed:", err);
+      }
+    } else {
+      console.warn("[Contact] RESEND_API_KEY not set. Email skipped.");
     }
 
     return NextResponse.json({ ok: true });
