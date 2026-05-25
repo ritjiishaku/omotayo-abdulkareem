@@ -148,7 +148,7 @@ export async function getExperiences(): Promise<Experience[]> {
 }
 
 export async function getProjects(): Promise<Project[]> {
-  const values = await getSheetValues("Projects!A1:K50");
+  const values = await getSheetValues("Projects!A1:L50");
   const parsed = parseRowsToObjects(values);
   if (!parsed) return mockProjects;
   return parsed.map((item) => ({
@@ -171,6 +171,7 @@ export async function getProjects(): Promise<Project[]> {
     image:
       item.image ||
       "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=800",
+    demoUrl: item.demourl || item.demo_url || undefined,
   }));
 }
 

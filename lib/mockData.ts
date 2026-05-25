@@ -129,7 +129,8 @@ export const projects: Project[] = [
     tools: ["Make.com", "OpenAI API", "Smartlead API", "HubSpot CRM", "Airtable"],
     outcome: "Reduced research time from 20 minutes to under 20 seconds per lead.\nIncreased email open rate by 34% and response rate by 2.5x.\nScaled outreach from 15 to 150 leads/day per rep.",
     featured: true,
-    image: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=800"
+    image: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=800",
+    demoUrl: "https://www.youtube.com/watch?v=demo-autoreach"
   },
   {
     id: "2",
@@ -142,7 +143,8 @@ export const projects: Project[] = [
     tools: ["Python", "FastAPI", "OpenAI GPT-4o", "Google Sheets API", "Slack Webhooks"],
     outcome: "Automated 92% of incoming invoices without manual entry.\nAccounting workload reduced by 12 hours weekly.\nDocument validation errors reduced to nearly 0%.",
     featured: true,
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800"
+    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800",
+    demoUrl: "https://www.youtube.com/watch?v=demo-docusense"
   },
   {
     id: "3",
@@ -155,7 +157,8 @@ export const projects: Project[] = [
     tools: ["Next.js", "Pinecone DB", "LangChain", "OpenAI API", "Twilio WhatsApp"],
     outcome: "Resolved 42% of support queries automatically.\nResponse time dropped from 4.2 hours to 3 seconds.\nCustomer satisfaction score improved by 18 points.",
     featured: true,
-    image: "https://images.unsplash.com/photo-1531747118685-ca8fa6e08806?q=80&w=800"
+    image: "https://images.unsplash.com/photo-1531747118685-ca8fa6e08806?q=80&w=800",
+    demoUrl: "https://www.youtube.com/watch?v=demo-supportsync"
   },
   {
     id: "4",

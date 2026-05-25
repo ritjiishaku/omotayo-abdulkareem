@@ -129,7 +129,7 @@ Categories are grouped in the UI via `Array.from(new Set(...))`.
 | Period | string | `Jan 2024 - Present` |
 | Description | string | Use `\n` for bullet lines |
 
-### `Projects` (range A1:K50)
+### `Projects` (range A1:L50)
 
 | Column header | Type | Example |
 |---------------|------|---------|
@@ -144,6 +144,7 @@ Categories are grouped in the UI via `Array.from(new Set(...))`.
 | Outcome | string | Bullet outcomes, use `\n` for lines |
 | Featured | boolean string | `TRUE` or `FALSE` (also accepts `true`/`1`/`yes`) |
 | Image | full URL string | `https://images.unsplash.com/...` (defaults to Unsplash placeholder if empty) |
+| DemoUrl | full URL string | `https://www.youtube.com/watch?v=...` (optional — shows "Watch Demo" button on project card and detail page) |
 
 ### `Testimonials` (range A1:C50)
 
@@ -192,7 +193,7 @@ POST /api/sheets
 | `services` | Services!A1:B50 |
 | `skills` | Skills!A1:C50 |
 | `experience` | Experience!A1:D50 |
-| `projects` | Projects!A1:K50 |
+| `projects` | Projects!A1:L50 |
 | `testimonials` | Testimonials!A1:C50 |
 
 ### Example: Python script to update services

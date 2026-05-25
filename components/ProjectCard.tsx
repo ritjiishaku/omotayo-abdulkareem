@@ -76,10 +76,26 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           )}
         </div>
 
-        {/* CTA */}
-        <div className="flex items-center space-x-1 text-xs uppercase tracking-wider text-gold font-semibold pt-1">
-          <span>Read Case Study</span>
-          <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 stroke-current fill-none group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" strokeWidth="2"><line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" /></svg>
+        {/* CTAs */}
+        <div className="flex items-center justify-between pt-1">
+          <div className="flex items-center space-x-1 text-xs uppercase tracking-wider text-gold font-semibold">
+            <span>Read Case Study</span>
+            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 stroke-current fill-none group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" strokeWidth="2"><line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" /></svg>
+          </div>
+          {project.demoUrl && (
+            <span
+              onClick={(e) => {
+                e.stopPropagation();
+                window.open(project.demoUrl, "_blank", "noopener,noreferrer");
+              }}
+              className="flex items-center space-x-1 text-xs uppercase tracking-wider text-gold-muted font-semibold hover:text-gold transition-colors duration-200"
+            >
+              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 stroke-current fill-none" strokeWidth="2">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg>
+              <span>Watch Demo</span>
+            </span>
+          )}
         </div>
       </div>
     </Link>

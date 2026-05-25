@@ -6,7 +6,7 @@ const TAB_RANGES: Record<string, string> = {
   services: "Services!A1:B50",
   skills: "Skills!A1:C50",
   experience: "Experience!A1:D50",
-  projects: "Projects!A1:K50",
+  projects: "Projects!A1:L50",
   testimonials: "Testimonials!A1:C50",
 };
 

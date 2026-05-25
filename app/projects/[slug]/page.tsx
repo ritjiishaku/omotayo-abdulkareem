@@ -197,6 +197,22 @@ export default async function ProjectPage({ params }: PageProps) {
                     </ul>
                   </div>
                 )}
+
+                {project.demoUrl && (
+                  <div className="pt-4">
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center space-x-3 px-6 py-3 rounded-lg bg-gold text-bg-primary font-semibold text-sm uppercase tracking-wider hover:bg-gold-muted transition-colors duration-200"
+                    >
+                      <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current" strokeWidth="0">
+                        <polygon points="5 3 19 12 5 21 5 3" />
+                      </svg>
+                      <span>Watch Demo Recording</span>
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
           </div>

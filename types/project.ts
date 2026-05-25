@@ -10,4 +10,5 @@ export interface Project {
   outcome: string;
   featured: boolean;
   image: string;
+  demoUrl?: string;
 }
