@@ -109,3 +109,15 @@ h1, h2, h3, h4, h5, h6 {
 @utility tag {
   @apply text-[10px] tracking-wider font-medium text-text-muted px-2.5 py-1 rounded bg-bg-elevated border border-border;
 }
+
+/* ── Section Scroll Offsets ─── */
+
+section[id] {
+  scroll-margin-top: 80px;
+}
+
+/* ── Blur Utilities ─── */
+
+.blur-3xl {
+  filter: blur(64px);
+}

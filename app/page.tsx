@@ -1,12 +1,15 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import StatsBar from "@/components/StatsBar";
 import About from "@/components/About";
 import Services from "@/components/Services";
+import Process from "@/components/Process";
 import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
 import Testimonials from "@/components/Testimonials";
+import FadeInSection from "@/components/FadeInSection";
 import dynamic from "next/dynamic";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import Footer from "@/components/Footer";
@@ -68,23 +71,29 @@ export default async function Home() {
           {/* Section: Hero */}
           <Hero generalInfo={generalInfo} />
 
+          {/* Stats bar */}
+          <StatsBar stats={generalInfo.stats} />
+
           {/* Section: About */}
-          <About generalInfo={generalInfo} />
+          <FadeInSection><About generalInfo={generalInfo} /></FadeInSection>
 
           {/* Section: Services */}
-          <Services services={services} />
+          <FadeInSection><Services services={services} /></FadeInSection>
+
+          {/* Section: Process */}
+          <FadeInSection><Process /></FadeInSection>
 
           {/* Section: Skills */}
-          <Skills skills={skills} />
+          <FadeInSection><Skills skills={skills} /></FadeInSection>
 
           {/* Section: Experience */}
-          <Experience experiences={experiences} />
+          <FadeInSection><Experience experiences={experiences} /></FadeInSection>
 
           {/* Section: Projects */}
-          <Projects projects={projects} />
+          <FadeInSection><Projects projects={projects} /></FadeInSection>
 
           {/* Section: Testimonials */}
-          <Testimonials testimonials={testimonials} />
+          <FadeInSection><Testimonials testimonials={testimonials} /></FadeInSection>
 
           {/* Section: Contact Form */}
           <Contact generalInfo={generalInfo} />

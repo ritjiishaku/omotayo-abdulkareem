@@ -12,8 +12,18 @@ export default function Hero({ generalInfo }: HeroProps) {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center bg-bg-primary"
+      className="relative min-h-screen flex items-center justify-center bg-bg-primary overflow-hidden"
     >
+      {/* Grid overlay */}
+      <div className="absolute inset-0 bg-grid-lines pointer-events-none" />
+
+      {/* Radial vignette */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(212,175,55,0.06)_0%,_transparent_70%)] pointer-events-none" />
+
+      {/* Floating orbs */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-gold/3 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-gold/3 blur-3xl pointer-events-none" />
+
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-px bg-gold/30" />
 
       <div className="max-w-4xl mx-auto px-6 py-12 lg:py-24 text-center space-y-8 md:space-y-10">

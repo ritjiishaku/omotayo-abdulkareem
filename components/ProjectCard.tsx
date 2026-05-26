@@ -12,6 +12,18 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       href={`/projects/${project.slug}`}
       className="group block bg-bg-surface rounded-lg border border-border hover:border-gold/30 hover:shadow-gold-sm transition-all duration-300 hover:-translate-y-0.5"
     >
+      {/* Thumbnail image */}
+      {project.image && (
+        <div className="relative w-full h-40 overflow-hidden rounded-t-lg">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-bg-surface to-transparent" />
+        </div>
+      )}
       <div className="p-6 space-y-5">
         {/* Header: Featured badge + category */}
         <div className="flex items-center justify-between gap-3">

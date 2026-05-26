@@ -98,6 +98,16 @@ export default function Navbar({ generalInfo }: NavbarProps) {
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
+        <button
+          onClick={() => setIsOpen(false)}
+          className="absolute top-4 right-4 text-text-muted hover:text-gold transition-colors duration-200"
+          aria-label="Close menu"
+        >
+          <svg viewBox="0 0 24 24" className="h-6 w-6 stroke-current fill-none" strokeWidth="2">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
         <div className="flex flex-col h-full justify-between p-8 overflow-y-auto">
           <div className="space-y-6 mt-16">
             {navLinks.map(link => (

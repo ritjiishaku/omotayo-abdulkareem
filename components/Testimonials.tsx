@@ -19,7 +19,7 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
           {testimonials.map((testimonial, idx) => (
             <div
               key={idx}
-              className="card-hover flex flex-col justify-between"
+              className="card-hover p-6 md:p-8 flex flex-col justify-between"
             >
               <div className="space-y-6">
                 <svg viewBox="0 0 24 24" className="h-8 w-8 text-gold/20 fill-current"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" /><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" /></svg>
