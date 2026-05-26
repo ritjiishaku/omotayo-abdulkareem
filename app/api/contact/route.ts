@@ -1,12 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
 import { getAccessToken } from "@/lib/sheetsAuth";
 
 const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const RANGE = "ContactSubmissions!A:D";
-
-const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null;
 
 export async function POST(req: NextRequest) {
   try {
@@ -49,22 +46,29 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Send email notification via Resend
-    if (resend) {
+    // Send email notification via Resend REST API
+    if (RESEND_API_KEY) {
       try {
-        await resend.emails.send({
-          from: "Portfolio Contact <onboarding@resend.dev>",
-          to: "omolinks@gmail.com",
-          subject: `New Contact from ${trimmedName}`,
-          html: `
-            <h2>New Contact Form Submission</h2>
-            <p><strong>Name:</strong> ${trimmedName}</p>
-            <p><strong>Email:</strong> ${trimmedEmail}</p>
-            <p><strong>Message:</strong></p>
-            <p style="white-space: pre-wrap;">${trimmedMessage}</p>
-            <hr />
-            <p style="color: #888; font-size: 12px;">Submitted at ${timestamp}</p>
-          `,
+        await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${RESEND_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            from: "Portfolio Contact <onboarding@resend.dev>",
+            to: "omolinks@gmail.com",
+            subject: `New Contact from ${trimmedName}`,
+            html: `
+              <h2>New Contact Form Submission</h2>
+              <p><strong>Name:</strong> ${trimmedName}</p>
+              <p><strong>Email:</strong> ${trimmedEmail}</p>
+              <p><strong>Message:</strong></p>
+              <p style="white-space: pre-wrap;">${trimmedMessage}</p>
+              <hr />
+              <p style="color: #888; font-size: 12px;">Submitted at ${timestamp}</p>
+            `,
+          }),
         });
         console.log("[Contact] Email sent to omolinks@gmail.com");
       } catch (err) {
